@@ -1,0 +1,19 @@
+.footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+.footer-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 13px;
+    flex-wrap: wrap;
+}
+.description {
+}
+.version {
+}
+.Copyright {
+    font-size: 13px;
+}

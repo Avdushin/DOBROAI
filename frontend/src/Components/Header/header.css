@@ -1,0 +1,35 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 5px 0px;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: space-around;
+    background: rgba(27,38,54, .2);
+    align-items: center;
+}
+.header-logo {
+}
+.preffix {
+    font-size: 10px;
+    text-align: center;
+}
+.green {
+    color: var(--green);
+}
+.orange {
+    color: var(--orange);
+}
+.nev-menu {
+    display: flex;
+    gap: 20px;
+}
+.menu-item {
+    color: var(--link);
+    text-decoration: none;
+}
+.menu-item:hover {
+    border-bottom: 1px solid var(--link);
+}
