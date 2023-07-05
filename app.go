@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 
@@ -32,31 +31,10 @@ func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
 
-// SaveToken сохраняет токен OpenAI в файл
-func (a *App) SaveToken(token string) error {
-	err := ioutil.WriteFile("../.env", []byte(token), 0644)
-
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-// LoadToken loads the OpenAI token from the file and sets it as an environment variable
-func (a *App) LoadToken() error {
-	token, err := ioutil.ReadFile("./.env")
-
-	if err != nil {
-		return err
-	}
-	os.Setenv("OpenAIKey", string(token))
-	return nil
-}
-
 func (a *App) ChatGPT(querry string) (string, error) {
 	// Load .env
 	if err := godotenv.Load(); err != nil {
-		log.Println("ошибка загрузки .env")
+		log.Println("Ошибка загрузки .env")
 	}
 
 	OpenAIKey := os.Getenv("OpenAIKey")
@@ -86,7 +64,7 @@ func (a *App) ChatGPT(querry string) (string, error) {
 
 	resp, err := client.CreateChatCompletion(context.Background(), req)
 	if err != nil {
-		return "", fmt.Errorf("ChatCompletion error: %v", err)
+		return "", fmt.Errorf("Ошибка завершения чата: %v", err)
 	}
 
 	answer := ""

@@ -4,7 +4,3 @@
 export function ChatGPT(arg1:string):Promise<string>;
 
 export function Greet(arg1:string):Promise<string>;
-
-export function LoadToken():Promise<void>;
-
-export function SaveToken(arg1:string):Promise<void>;

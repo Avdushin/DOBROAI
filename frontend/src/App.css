@@ -91,11 +91,9 @@ textarea {
 .input-box {
   display: flex;
   justify-content: center;
-  /* flex-direction: column; */
   width: 100%;
   margin-top: auto;
   gap: 5px;
-  /* padding: 10px; */
 }
 .input-box .btn {
   line-height: 30px;
@@ -127,6 +125,7 @@ textarea {
 
 .faq-answ {
   color: var(--text);
+  padding: 0 15px;
 }
 
 ul,
@@ -218,16 +217,16 @@ li {
   justify-content: center;
   gap: 5px;
 }
-.settings-input {
-}
-.settings-button {
-}
 .settings-close {
   position: absolute;
   color: var(--text);
   top: 5px;
   right: 10px;
   cursor: pointer;
+}
+
+.token {
+  overflow-wrap: break-word;
 }
 
 /* Responsive */

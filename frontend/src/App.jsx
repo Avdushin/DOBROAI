@@ -24,13 +24,7 @@ function App() {
   };
 
   function gpt() {
-    ChatGPT(querry)
-      .then(updateAnswer)
-      .finally(resetQuerry)
-      .catch((error) => {
-        console.error("Ошибка:", error);
-        showNotification("Введите ваш токен от OpenAI");
-      });
+    ChatGPT(querry).then(updateAnswer).finally(resetQuerry);
   }
 
   const resetQuerry = () => {
@@ -67,15 +61,27 @@ function App() {
                   У меня есть идея, как улучшить приложение! Что делать?
                 </li>
                 <li className="qa">
-                  Напишите ваше предложение в обсуждениях в
+                  Напишите ваше предложение в обсуждениях в{" "}
                   <a href="https://github.com/Avdushin/DOBROAI" target="_blank">
                     GitHub репозитории
                   </a>
                 </li>
-                <li className="q">dd</li>
-                <li className="qa">dd</li>
-                <li className="q">dd</li>
-                <li className="qa">dd</li>
+                <li className="q">У меня не работает ChatGPT! Как починить?</li>
+                <li className="qa">
+                  Вам нужно добавить файл <code>.env</code>, содержащий
+                  переменную <code>OpenAIKey</code> с вашим токеном от{" "}
+                  <a
+                    href="https://platform.openai.com/account/api-keys"
+                    target="_blank"
+                  >
+                    OPEN AI
+                  </a>{" "}
+                  <br />
+                  Пример: <br />
+                  <code className="token">
+                    OpenAIKey="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"
+                  </code>
+                </li>
               </ul>
             </div>
           </div>
