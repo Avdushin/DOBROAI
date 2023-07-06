@@ -33,7 +33,7 @@ go install github.com/wailsapp/wails/v2/cmd/wails@latest
 
 ```bash
 cd DOBROAI/frontend && npm i
-cd ..
+cd .. && npm i
 wails dev
 или
 wails build # (в папке `build/bin` появится ваш бинарник - не забудьте переместить в неё файл .env с вашим openai токеном)
