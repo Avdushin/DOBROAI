@@ -30,17 +30,33 @@ li {
 
 /* ==== App ==== */
 
-.gpt {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 #root {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+#app {
+  height: 100vh;
+  text-align: center;
+}
+
+.gpt {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* GPT loading */
+.loading-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.loading-animation > div {
+  margin: 0 auto;
 }
 
 .input-box {
@@ -52,21 +68,6 @@ li {
   gap: 5px;
 }
 
-#app {
-  height: 100vh;
-  text-align: center;
-}
-
-#logo {
-  display: block;
-  width: 50%;
-  height: 50%;
-  margin: auto;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-origin: content-box;
-}
 
 .brand {
   margin-top: 100px;
@@ -81,7 +82,7 @@ li {
 
 .input-box textarea {
   width: 90%;
-  height: 70px;
+  height: 60px;
 }
 
 .input-box {
@@ -119,6 +120,7 @@ li {
   color: #fff;
 }
 
+/* ==== FAQ ==== */
 .faq-answ {
   color: var(--text);
   padding: 0 15px;
@@ -148,18 +150,15 @@ li {
   height: 30px;
   line-height: 30px;
   padding: 0 10px;
-  background-color: rgba(240, 240, 240, 1);
   -webkit-font-smoothing: antialiased;
 }
 
 .input-box .input:hover {
   border: none;
-  background-color: rgba(255, 255, 255, 1);
 }
 
 .input-box .input:focus {
   border: none;
-  background-color: rgba(255, 255, 255, 1);
 }
 
 .answer {
@@ -171,13 +170,6 @@ li {
 
 .scrollable-content {
   text-align: left;
-}
-
-.input textarea {
-  width: 20px;
-  height: 70px;
-  resize: none;
-  padding: 5px 0px;
 }
 
 /* Settings */

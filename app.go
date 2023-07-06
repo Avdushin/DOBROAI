@@ -26,11 +26,6 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
-// Greet returns a greeting for the given name
-func (a *App) Greet(name string) string {
-	return fmt.Sprintf("Hello %s, It's show time!", name)
-}
-
 func (a *App) ChatGPT(querry string) (string, error) {
 	// Load .env
 	if err := godotenv.Load(); err != nil {
@@ -42,7 +37,7 @@ func (a *App) ChatGPT(querry string) (string, error) {
 	client := openai.NewClient(OpenAIKey)
 
 	req := openai.ChatCompletionRequest{
-		Model: openai.GPT3Dot5Turbo,
+		Model: openai.GPT3Dot5Turbo16K0613,
 		Messages: []openai.ChatCompletionMessage{
 			{
 				Role:    openai.ChatMessageRoleSystem,

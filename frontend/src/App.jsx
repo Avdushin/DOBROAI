@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Greet, ChatGPT } from "../wailsjs/go/main/App";
+import { ChatGPT } from "../wailsjs/go/main/App";
 import ReactMarkdown from "react-markdown";
+import { BeatLoader } from "react-spinners";
 import sendBtn from "./assets/icons/send.svg";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
@@ -8,31 +9,65 @@ import { github } from "./vars";
 import "./App.css";
 
 function App() {
-  // gpt
+  // GPT
   const [answerText, setAnswerText] = useState("");
   const [querry, setQuerry] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const updateResultQuerry = (e) => setQuerry(e.target.value);
 
+  // Обработка клавиш
+  const handleTextareaKeyPress = (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      gpt();
+    }
+  };
+
+  // Update GPT answer
   const updateAnswer = (answer) => {
     setAnswerText(answer);
   };
 
+  // Settings -> FAQ popup
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-
   const toggleSettings = () => {
     setIsSettingsOpen(!isSettingsOpen);
   };
 
+  // ChatGPT API call
   function gpt() {
-    ChatGPT(querry).then(updateAnswer).finally(resetQuerry);
+    if (querry.trim() !== "") {
+      startLoading();
+      ChatGPT(querry)
+        .then(updateAnswer)
+        .catch((error) => {
+          console.error(error);
+          updateAnswer("Произошла ошибка при обработке запроса.");
+        })
+        .finally(() => {
+          stopLoading();
+          resetQuerry();
+        });
+    }
   }
 
+  // Reset user's querry
   const resetQuerry = () => {
     setQuerry("");
   };
 
+  // Is loading check
+  const startLoading = () => {
+    setIsLoading(true);
+  };
+
+  const stopLoading = () => {
+    setIsLoading(false);
+  };
+
   return (
     <>
+      {/* FAQ */}
       {isSettingsOpen && (
         <div className="settings-popup">
           <div className="popup-box">
@@ -111,6 +146,7 @@ function App() {
             className="input"
             value={querry}
             onChange={updateResultQuerry}
+            onKeyPress={handleTextareaKeyPress}
             autoComplete="off"
             name="input"
             type="text"
@@ -123,7 +159,11 @@ function App() {
             placeholder="Введите запрос..."
           />
           <div className="btn send-btn" onClick={gpt}>
-            <img src={sendBtn} alt="send-button" />
+            {isLoading ? (
+              <BeatLoader size={8} color={"#ffffff"} loading={isLoading} />
+            ) : (
+              <img src={sendBtn} alt="send-button" />
+            )}
           </div>
         </div>
       </div>

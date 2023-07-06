@@ -3,6 +3,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "font-awesome": "^4.7.0",
     "react-markdown": "^8.0.7",
-    "react-router-dom": "^6.14.1"
+    "react-router-dom": "^6.14.1",
+    "react-spinners": "^0.13.8"
   }
 }
