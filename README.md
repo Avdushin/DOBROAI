@@ -1,19 +1,59 @@
-# README
+# DOBROAI
 
-## About
+DOBROAI - это клиент для работы с [ChatGPT](https://chat.openai.com) от компании [AOPENAI](https://openai.com) написанный на Golang + ReactJS
 
-This is the official Wails React template.
+![DOBROAI-DEMO](src/app.jpg)
 
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
+![DOBROAI-PROMPT](src/prompt.jpg)
 
-## Live Development
+### Мотивация
 
-To run in live development mode, run `wails dev` in the project directory. This will run a Vite development
-server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser
-and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect
-to this in your browser, and you can call your Go code from devtools.
+Зачем создан данный проект?
 
-## Building
+1. Практика работы с openai api
+2. Получение опыта в разработке WebView приложений на [Golang](https://go.dev)
+3. Попробовать неординарное решение ([Wails](https://wails.io))
+4. Укрепить знание Go и ReactJS
 
-To build a redistributable, production mode package, use `wails build`.
+### Зависимости
+
+- [GO](https://go.dev/dl)
+- [NodeJS](https://nodejs.org/en/download)
+- [Wails](https://wails.io)
+
+### Установка
+
+#### Установка Wails
+
+```bash
+go install github.com/wailsapp/wails/v2/cmd/wails@latest
+```
+
+#### Установка зависимостей
+
+```bash
+cd DOBROAI/frontend && npm i
+cd ..
+wails dev
+или
+wails build # (в папке `build/bin` появится ваш бинарник - не забудьте переместить в неё файл .env с вашим openai токеном)
+./build/bin/DobroAI.exe
+```
+
+### Переменные окружения
+
+Для работы приложения необходимо создать файл `.env` с определенной в нём переменной `OpenAIKey`, содержащей ваш openai токен
+
+Пример: `OpenAIKey="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"`
+
+### Автор
+
+| Фото | Имя |
+|---| ---|
+| <img src="./src/ava.jfif" alt="itdobro-ava" width="35px"> | [ITDOBRO](https://github.com/Avdushin) |
+
+
+
+<center>
+    <a href="https://github.com/Avdushin" target="_blank">&COPY; 2023 ITDOBRO</a>
+<center>
