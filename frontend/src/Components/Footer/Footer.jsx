@@ -1,5 +1,5 @@
 import React from "react";
-import { github, version } from "../../vars";
+import { AI } from "../../vars";
 import "./footer.css";
 
 function Footer() {
@@ -12,7 +12,7 @@ function Footer() {
           </p>
         </div>
         <div className="version">
-          <p>Версия: {version} </p>
+          <p>Версия: {AI.version} </p>
         </div>
       </div>
       <div className="Copyright">

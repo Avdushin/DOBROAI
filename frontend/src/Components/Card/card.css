@@ -1,0 +1,17 @@
+.cards__wrapper {
+    position: relative;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    transform: scale(.7);
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0px auto;
+}
+.card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: .375rem;
+    width: 250px;
+    cursor: pointer;
+}

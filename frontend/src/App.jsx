@@ -1,21 +1,41 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChatGPT } from "../wailsjs/go/main/App";
 import ReactMarkdown from "react-markdown";
 import { BeatLoader } from "react-spinners";
 import sendBtn from "./assets/icons/send.svg";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import { github } from "./vars";
+import FAQ from "./Components/FAQ/FAQ";
+import Card from "./Components/Card/Card";
+import data from "./assets/data/data";
+import gptAvatar from "./assets/images/chatgpt-logo.jpg";
+import userAvatar from "./assets/images/user.png"
+import { AI } from "./vars";
 import "./App.css";
 
 function App() {
-  // GPT
   const [answerText, setAnswerText] = useState("");
   const [querry, setQuerry] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const updateResultQuerry = (e) => setQuerry(e.target.value);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const textareaRef = useRef(null);
 
-  // Обработка клавиш
+  const handleTextareaResize = () => {
+    const textarea = textareaRef.current;
+    textarea.style.height = "auto";
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  };
+
+  const handleTextareaChange = (event) => {
+    setQuerry(event.target.value);
+  };
+
+  const handleCardClick = (text) => {
+    textareaRef.current.value = text;
+    setQuerry(text);
+  };
+
   const handleTextareaKeyPress = (event) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
@@ -23,18 +43,25 @@ function App() {
     }
   };
 
-  // Update GPT answer
-  const updateAnswer = (answer) => {
-    setAnswerText(answer);
+  const RealodPage = (event) => {
+    if (
+      (event.ctrlKey && event.key === "r") ||
+      (event.ctrlKey && event.key === "к")
+    ) {
+      event.preventDefault();
+      window.location.reload();
+    }
   };
 
-  // Settings -> FAQ popup
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const updateAnswer = (answer) => {
+    setAnswerText(answer);
+    addToChatHistory({ question: querry, answer: answer });
+  };
+
   const toggleSettings = () => {
     setIsSettingsOpen(!isSettingsOpen);
   };
 
-  // ChatGPT API call
   function gpt() {
     if (querry.trim() !== "") {
       startLoading();
@@ -51,12 +78,10 @@ function App() {
     }
   }
 
-  // Reset user's querry
   const resetQuerry = () => {
     setQuerry("");
   };
 
-  // Is loading check
   const startLoading = () => {
     setIsLoading(true);
   };
@@ -65,105 +90,105 @@ function App() {
     setIsLoading(false);
   };
 
+  const addToChatHistory = (message) => {
+    setChatHistory((prevHistory) => [...prevHistory, message]);
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", RealodPage);
+    return () => {
+      window.removeEventListener("keydown", RealodPage);
+    };
+  }, []);
+
+  useEffect(() => {
+    handleTextareaResize();
+  }, [querry]);
+
   return (
     <>
-      {/* FAQ */}
       {isSettingsOpen && (
-        <div className="settings-popup">
-          <div className="popup-box">
-            <div className="settings-title">Часто задаваемые вопросы</div>
-            <div className="settings-close" onClick={toggleSettings}>
-              &#10006;
-            </div>
-            <div className="faq-answ">
-              <ul>
-                <li className="q">Что это за программа?</li>
-                <li className="qa">
-                  Это клиент для работы с{" "}
-                  <a href="https://chat.openai.com/" target="_blank">
-                    ChatGPT
-                  </a>
-                  , написанный на Wails (
-                  <a href="https://go.dev" target="_blank">
-                    Golang
-                  </a>
-                  <a href="https://react.dev/" target="_blank">
-                    ReactJS
-                  </a>
-                  )
-                </li>
-                <li className="q">
-                  У меня есть идея, как улучшить приложение! Что делать?
-                </li>
-                <li className="qa">
-                  Напишите ваше предложение в обсуждениях в{" "}
-                  <a href="https://github.com/Avdushin/DOBROAI" target="_blank">
-                    GitHub репозитории
-                  </a>
-                </li>
-                <li className="q">У меня не работает ChatGPT! Как починить?</li>
-                <li className="qa">
-                  Вам нужно добавить файл <code>.env</code>, содержащий
-                  переменную <code>OpenAIKey</code> с вашим токеном от{" "}
-                  <a
-                    href="https://platform.openai.com/account/api-keys"
-                    target="_blank"
-                  >
-                    OPEN AI
-                  </a>{" "}
-                  <br />
-                  Пример: <br />
-                  <code className="token">
-                    OpenAIKey="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"
-                  </code>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <FAQ isOpen={isSettingsOpen} toggleSettings={toggleSettings} />
       )}
 
       <Header toggleSettings={toggleSettings} />
       <div id="root" className="gpt">
-        <div className="brand">
-          <a href={github} target="_blank">
-            ITDOBRO
-          </a>
-          <br />
-          <div className="preffix">
-            <span className="green">GPT &nbsp;</span>
-            <span className="orange">CLIENT</span>
-          </div>
+        <div className="chat-history" id="chat-history">
+          {chatHistory.length === 0 ? (
+            <div className="logo-container">
+              <div className="logo-container__wrapper">
+                <h1 className="logo-container__title">{AI.name}</h1>
+                <div className="cards__wrapper">
+                  {data.map((item, index) => (
+                    <Card
+                      key={index}
+                      title={item.title}
+                      description={item.description}
+                      handleCardClick={handleCardClick}
+                    />
+                  ))}
+                  <span>Примеры промптов приведены выше - попробуйте!</span>
+                </div>
+              </div>
+            </div>
+          ) : (
+            chatHistory.map((message, index) => (
+              <div key={index}>
+                <div className="gpt__question">
+                  <div className="gpt__question__avatar">
+                    <img src={gptAvatar} alt="ChatGPT" />
+                  </div>
+                  <div className="gpt__question__question">
+                    <ReactMarkdown>{message.question}</ReactMarkdown>
+                  </div>
+                </div>
+                <div className="gpt__answer">
+                  <div className="gpt__answer__wrapper">
+                    <div className="gpt__answer__avatar">
+                      <img src={userAvatar} alt="userAvatar" />
+                    </div>
+                    <div className="gpt__answer__answer">
+                      <ReactMarkdown>{message.answer}</ReactMarkdown>
+                    </div>
+                  </div>
+                  <div
+                    className="scroll-to-bottom"
+                    onClick={() => {
+                      const chatHistory =
+                        document.getElementById("chat-history");
+                      chatHistory.scrollTop = chatHistory.scrollHeight;
+                    }}
+                  ></div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
-        <div id="answer" className="answer">
-          <div className="scrollable-content">
-            <ReactMarkdown>{answerText}</ReactMarkdown>
-          </div>
-        </div>
+
         <div id="input" className="input-box">
-          <textarea
-            id="querry"
-            className="input"
-            value={querry}
-            onChange={updateResultQuerry}
-            onKeyPress={handleTextareaKeyPress}
-            autoComplete="off"
-            name="input"
-            type="text"
-            style={{
-              height: "40px",
-              lineHeight: "0.9",
-              paddingTop: "10px",
-              fontSize: "14px",
-            }}
-            placeholder="Введите запрос..."
-          />
-          <div className="btn send-btn" onClick={gpt}>
-            {isLoading ? (
-              <BeatLoader size={8} color={"#ffffff"} loading={isLoading} />
-            ) : (
-              <img src={sendBtn} alt="send-button" />
-            )}
+          <div className="textarea-container">
+            <textarea
+              ref={textareaRef}
+              id="querry"
+              className="input"
+              value={querry}
+              onChange={(e) => {
+                setQuerry(e.target.value);
+                handleTextareaChange(e);
+              }}
+              onKeyPress={handleTextareaKeyPress}
+              autoComplete="off"
+              name="input"
+              type="text"
+              placeholder="Введите запрос..."
+            />
+            <div className="btn send-btn" onClick={gpt}>
+              {isLoading ? (
+                <BeatLoader size={8} color={"#ffffff"} loading={isLoading} />
+              ) : (
+                <img src={sendBtn} alt="send-button" />
+              )}
+            </div>
           </div>
         </div>
       </div>
