@@ -124,7 +124,7 @@ li {
 .textarea-container textarea {
   width: 100%;
   resize: none;
-  min-height: 30px;
+  min-height: 20px;
   max-height: 160px;
   overflow-y: auto;
 }
@@ -266,7 +266,7 @@ li {
 .settings-popup {
   position: absolute;
   width: 100%;
-  top: 20%;
+  top: 17%;
   margin: 0px auto;
 }
 .popup-box {

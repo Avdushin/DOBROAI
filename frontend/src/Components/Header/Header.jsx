@@ -8,11 +8,12 @@ const Header = ({ toggleSettings }) => {
     <header className="header">
       <div className="header-logo">
         <a href="/">
-          <img width={40} height={40} src={logo} alt="logo" />
+          {/* <img width={40} height={40} src={logo} alt="logo" /> */}
+          <b>DOBROAI</b>
         </a>
       </div>
       <nav className="nev-menu">
-        <a href={AI.github} className="menu-item" target="_blank">
+        <a href={AI.repo} className="menu-item" target="_blank">
           GitHub
         </a>
         <a href={AI.telegram} className="menu-item" target="_blank">

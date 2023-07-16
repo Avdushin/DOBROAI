@@ -53,6 +53,12 @@ function FAQ({ isOpen, toggleSettings }) {
                 OpenAIKey="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"
               </code>
             </li>
+            <li className="q">
+              Как очистить историю чата?
+            </li>
+            <li className="qa">
+              Чтобы очистить историю чата - обновите страницу сочитанием клавиш <code><i>CTRL+R</i></code>
+            </li>
           </ul>
         </div>
       </div>
