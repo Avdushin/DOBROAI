@@ -1,0 +1,24 @@
+/* ==== FAQ ==== */
+.faq-answ {
+  color: var(--text);
+  padding: 0 15px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.q {
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.qa {
+  font-weight: 500;
+  list-style: circle inside;
+  padding: 10px 0;
+  color: var(--text);
+}
+
+.qa a {
+  color: var(--text);
+  text-decoration: underline;
+}

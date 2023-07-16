@@ -1,7 +1,7 @@
 html {
-    background-color: rgba(35, 39, 46, 1);
+    background-color: var(--bg);
+    color: var(--white);
     text-align: center;
-    color: white;
 }
 
 body {
@@ -11,14 +11,6 @@ body {
     "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
-/* 
-@font-face {
-    font-family: "Nunito";
-    font-style: normal;
-    font-weight: 400;
-    src: local(""),
-    url("assets/fonts/nunito-v16-latin-regular.woff2") format("woff2");
-} */
 
 #app {
     height: 100vh;

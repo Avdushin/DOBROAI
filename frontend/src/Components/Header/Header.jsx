@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../../assets/images/logo-universal.png";
-import { github, discord, telegram } from "../../vars";
+import { AI } from "../../vars";
 import "./header.css";
 
 const Header = ({ toggleSettings }) => {
@@ -8,17 +8,18 @@ const Header = ({ toggleSettings }) => {
     <header className="header">
       <div className="header-logo">
         <a href="/">
-          <img width={40} height={40} src={logo} alt="logo" />
+          {/* <img width={40} height={40} src={logo} alt="logo" /> */}
+          <b>DOBROAI</b>
         </a>
       </div>
       <nav className="nev-menu">
-        <a href={github} className="menu-item" target="_blank">
+        <a href={AI.repo} className="menu-item" target="_blank">
           GitHub
         </a>
-        <a href={telegram} className="menu-item" target="_blank">
+        <a href={AI.telegram} className="menu-item" target="_blank">
           Telegram
         </a>
-        <a href={discord} className="menu-item" target="_blank">
+        <a href={AI.discord} className="menu-item" target="_blank">
           Discord
         </a>
         <a href="#" className="menu-item" onClick={toggleSettings}>

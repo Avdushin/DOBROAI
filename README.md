@@ -2,9 +2,9 @@
 
 DOBROAI - это клиент для работы с [ChatGPT](https://chat.openai.com) от компании [AOPENAI](https://openai.com) написанный на Golang + ReactJS
 
-![DOBROAI-DEMO](src/app.jpg)
+![DOBROAI-DEMO](src/app.png)
 
-![DOBROAI-PROMPT](src/prompt.jpg)
+![DOBROAI-PROMPT](src/prompt.png)
 
 ### Мотивация
 
